@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
             disableLoginButton.alpha = 1
             var alertView = UIAlertView(title: "Incorrect Username", message: "Please try again", delegate: nil, cancelButtonTitle: "OK")
             alertView.show()
+            usernameTextField.text = ""
             
         }
         
@@ -58,6 +59,7 @@ class LoginViewController: UIViewController {
                 var alertView = UIAlertView(title: "Incorrect Password", message: "Please try entering your password again", delegate: nil, cancelButtonTitle: "OK")
                 alertView.show()
                 self.loaderIndicator.stopAnimating()
+                self.passwordTextField.text = ""
             }
         })
 

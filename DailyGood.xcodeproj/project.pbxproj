@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283825561A9BD2D7001EE5A2 /* VolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283825551A9BD2D7001EE5A2 /* VolCell.swift */; };
+		283825581A9C25EE001EE5A2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283825571A9C25EE001EE5A2 /* CoreLocation.framework */; };
+		2838255B1A9C859E001EE5A2 /* dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838255A1A9C859E001EE5A2 /* dummy.m */; };
+		3E88E6229FBF0B8903BBE456 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11E9154F5D331D4F6F5DF11 /* libPods.a */; };
 		B8C5B86B1A916D3C00A1909F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */; };
 		B8C5B86D1A916D3C00A1909F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C5B86C1A916D3C00A1909F /* ViewController.swift */; };
 		B8C5B8701A916D3C00A1909F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8C5B86E1A916D3C00A1909F /* Main.storyboard */; };
@@ -31,6 +35,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		283825551A9BD2D7001EE5A2 /* VolCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolCell.swift; sourceTree = "<group>"; };
+		283825571A9C25EE001EE5A2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		283825591A9C859E001EE5A2 /* DailyGood-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DailyGood-Bridging-Header.h"; sourceTree = "<group>"; };
+		2838255A1A9C859E001EE5A2 /* dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dummy.m; sourceTree = "<group>"; };
+		28B5FE79BB94E817DA54B43F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6E00CAA1119961FAE6D8ED6D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B8C5B8651A916D3C00A1909F /* DailyGood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyGood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C5B8691A916D3C00A1909F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +56,7 @@
 		B8C5B88E1A9178DA00A1909F /* FeedDetail1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetail1ViewController.swift; sourceTree = "<group>"; };
 		B8DB0C3F1A92B67F007EFD14 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B8DB0C411A930484007EFD14 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		C11E9154F5D331D4F6F5DF11 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283825581A9C25EE001EE5A2 /* CoreLocation.framework in Frameworks */,
+				3E88E6229FBF0B8903BBE456 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,12 +79,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06CC2096E4982442834A2A94 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C11E9154F5D331D4F6F5DF11 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1CFC53D878C88ADE11854595 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E00CAA1119961FAE6D8ED6D /* Pods.debug.xcconfig */,
+				28B5FE79BB94E817DA54B43F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B8C5B85C1A916D3C00A1909F = {
 			isa = PBXGroup;
 			children = (
+				283825571A9C25EE001EE5A2 /* CoreLocation.framework */,
 				B8C5B8671A916D3C00A1909F /* DailyGood */,
 				B8C5B87D1A916D3D00A1909F /* DailyGoodTests */,
 				B8C5B8661A916D3C00A1909F /* Products */,
+				1CFC53D878C88ADE11854595 /* Pods */,
+				06CC2096E4982442834A2A94 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +131,9 @@
 				B8C5B8711A916D3C00A1909F /* Images.xcassets */,
 				B8C5B8731A916D3C00A1909F /* LaunchScreen.xib */,
 				B8C5B8681A916D3C00A1909F /* Supporting Files */,
+				283825551A9BD2D7001EE5A2 /* VolCell.swift */,
+				2838255A1A9C859E001EE5A2 /* dummy.m */,
+				283825591A9C859E001EE5A2 /* DailyGood-Bridging-Header.h */,
 			);
 			path = DailyGood;
 			sourceTree = "<group>";
@@ -134,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8C5B8841A916D3D00A1909F /* Build configuration list for PBXNativeTarget "DailyGood" */;
 			buildPhases = (
+				4279B2D0654C7F0B180AF2A1 /* Check Pods Manifest.lock */,
 				B8C5B8611A916D3C00A1909F /* Sources */,
 				B8C5B8621A916D3C00A1909F /* Frameworks */,
 				B8C5B8631A916D3C00A1909F /* Resources */,
+				EB021932A7672E40A1BB30AF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -222,16 +260,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4279B2D0654C7F0B180AF2A1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EB021932A7672E40A1BB30AF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B8C5B8611A916D3C00A1909F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B8DB0C421A930484007EFD14 /* MoreViewController.swift in Sources */,
+				283825561A9BD2D7001EE5A2 /* VolCell.swift in Sources */,
 				B8DB0C401A92B67F007EFD14 /* ProfileViewController.swift in Sources */,
 				B8C5B88D1A91738100A1909F /* Common.swift in Sources */,
 				B8C5B86D1A916D3C00A1909F /* ViewController.swift in Sources */,
 				B8C5B88F1A9178DA00A1909F /* FeedDetail1ViewController.swift in Sources */,
+				2838255B1A9C859E001EE5A2 /* dummy.m in Sources */,
 				B8C5B88B1A916DC500A1909F /* FeedViewController.swift in Sources */,
 				B8C5B86B1A916D3C00A1909F /* AppDelegate.swift in Sources */,
 			);
@@ -354,21 +427,30 @@
 		};
 		B8C5B8851A916D3D00A1909F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E00CAA1119961FAE6D8ED6D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DailyGood/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DailyGood/DailyGood-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		B8C5B8861A916D3D00A1909F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28B5FE79BB94E817DA54B43F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DailyGood/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DailyGood/DailyGood-Bridging-Header.h";
 			};
 			name = Release;
 		};

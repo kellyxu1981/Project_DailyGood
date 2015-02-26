@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var btn_open_demographics: UIButton!
     @IBOutlet weak var btn_open_history: UIButton!
     
-    var profileTag: String = ""
+    var profileTag: String = "Environment"
     
     override func viewDidLoad() {
         super.viewDidLoad()

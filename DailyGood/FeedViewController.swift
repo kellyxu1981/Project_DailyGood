@@ -19,7 +19,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var opportunities: [NSDictionary]! = []
     var isNearby: Bool = true
     var refreshControl: UIRefreshControl!
-    var categoryTag: String = ""
+    var categoryTag: String = "Environment"
     
     @IBOutlet weak var btn_nearby: UIButton!
     @IBOutlet weak var btn_recent: UIButton!

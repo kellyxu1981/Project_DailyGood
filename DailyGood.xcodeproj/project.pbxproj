@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8A07A641A9E47470048D0AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A07A631A9E47470048D0AD /* LoginViewController.swift */; };
 		B8C5B86B1A916D3C00A1909F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */; };
 		B8C5B86D1A916D3C00A1909F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C5B86C1A916D3C00A1909F /* ViewController.swift */; };
 		B8C5B8701A916D3C00A1909F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8C5B86E1A916D3C00A1909F /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B8A07A631A9E47470048D0AD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B8C5B8651A916D3C00A1909F /* DailyGood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyGood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C5B8691A916D3C00A1909F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */,
 				B8C5B86C1A916D3C00A1909F /* ViewController.swift */,
 				B8C5B86E1A916D3C00A1909F /* Main.storyboard */,
+				B8A07A631A9E47470048D0AD /* LoginViewController.swift */,
 				B8DB0C411A930484007EFD14 /* MoreViewController.swift */,
 				B8DB0C3F1A92B67F007EFD14 /* ProfileViewController.swift */,
 				B8C5B88E1A9178DA00A1909F /* FeedDetail1ViewController.swift */,
@@ -231,6 +234,7 @@
 				B8DB0C401A92B67F007EFD14 /* ProfileViewController.swift in Sources */,
 				B8C5B88D1A91738100A1909F /* Common.swift in Sources */,
 				B8C5B86D1A916D3C00A1909F /* ViewController.swift in Sources */,
+				B8A07A641A9E47470048D0AD /* LoginViewController.swift in Sources */,
 				B8C5B88F1A9178DA00A1909F /* FeedDetail1ViewController.swift in Sources */,
 				B8C5B88B1A916DC500A1909F /* FeedViewController.swift in Sources */,
 				B8C5B86B1A916D3C00A1909F /* AppDelegate.swift in Sources */,

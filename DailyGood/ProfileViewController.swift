@@ -106,6 +106,7 @@ class ProfileViewController: UIViewController {
         self.btn_open_demographics.enabled = true
         self.btn_open_history.enabled = true
     }
+
     /*
     // MARK: - Navigation
 

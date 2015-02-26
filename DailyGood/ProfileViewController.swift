@@ -25,6 +25,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var btn_open_demographics: UIButton!
     @IBOutlet weak var btn_open_history: UIButton!
     
+    var profileTag: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,6 +44,8 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func onTapBackBtn(sender: AnyObject) {
+        var feedVC = self.presentingViewController as FeedViewController
+        feedVC.categoryTag = self.profileTag
         dismissViewControllerAnimated(true, completion: nil)
     }
 
@@ -106,6 +110,13 @@ class ProfileViewController: UIViewController {
         self.btn_open_demographics.enabled = true
         self.btn_open_history.enabled = true
     }
+    
+    @IBAction func onTagChoice(sender: UIButton) {
+        if let tag = sender.titleLabel?.text {
+            profileTag = tag
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

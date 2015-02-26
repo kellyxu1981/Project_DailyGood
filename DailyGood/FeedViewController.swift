@@ -15,13 +15,15 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var locationManager = CLLocationManager()
     var myLocation: String! = ""
+    var didFindLoc: Bool = false
     var opportunities: [NSDictionary]! = []
+    var isNearby: Bool = true
+    var refreshControl: UIRefreshControl!
+    var categoryTag: String = ""
     
     @IBOutlet weak var btn_nearby: UIButton!
     @IBOutlet weak var btn_recent: UIButton!
     
-    var isNearby: Bool = true
-    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +38,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // location stuff 
         // NB: the call to the API is made from setLocationInfo() when location is updated
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         triggerLocationServices()
         
         // NB: should make sure data is loaded from API again when refreshing....
@@ -53,11 +55,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // for location stuff -- we only need access to location when app is in use
     // note we also needed to add the NSLocationWhenInUseUsageDescription key-value in info.plist
     func triggerLocationServices() {
+        didFindLoc = false
         if CLLocationManager.locationServicesEnabled() {
             if self.locationManager.respondsToSelector("requestWhenInUseAuthorization") {
                 locationManager.requestWhenInUseAuthorization()
             } else {
-                locationManager.startUpdatingLocation()
+                locationManager.startMonitoringSignificantLocationChanges()
             }
         } else {
             var alert = UIAlertView(title: "Location Error", message: "Location services desabled", delegate: self, cancelButtonTitle: "OK")
@@ -66,7 +69,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
        if status == .AuthorizedWhenInUse || status == .Authorized {
-            locationManager.startUpdatingLocation()
+            locationManager.startMonitoringSignificantLocationChanges()
         }
     }
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
@@ -88,12 +91,25 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
     }
     func useLocationInfo(placemark: CLPlacemark!) {
-        if placemark != nil && placemark.subThoroughfare != nil {
+        if didFindLoc {
+            return
+        }
+        if placemark != nil && placemark.locality != nil {
             //stop updating location to save battery life
-            locationManager.stopUpdatingLocation()
-            myLocation = placemark.subThoroughfare + " " + placemark.thoroughfare + ", " + placemark.locality + ", " + placemark.administrativeArea
+            didFindLoc = true
+            locationManager.stopMonitoringSignificantLocationChanges()
+            myLocation = placemark.locality + ", " + placemark.administrativeArea
+            if placemark.thoroughfare != nil {
+                myLocation = placemark.thoroughfare + ", " + myLocation
+                if placemark.subThoroughfare != nil {
+                    myLocation = placemark.subThoroughfare + " " + myLocation
+                }
+            }
             // get data from API
             getVolOpps(myLocation)
+        } else {
+            var alert = UIAlertView(title: "Location Error", message: "Could not get your city", delegate: self, cancelButtonTitle: "OK")
+            alert.show()
         }
     }
     
@@ -129,7 +145,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             return cell
         }
-        // license = 7 (no copyright) does not return much, will deal with thislater
+        // license = 7 (no copyright) does not return much, will deal with this later
         // var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&license=7&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness&per_page=1"
         var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness-desc&per_page=1"
         flickrUrl += query
@@ -159,18 +175,27 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // for getting data from API
     func getVolOpps(city: String) {
-        var urlNear = "http://api2.allforgood.org/api/volopps?key=YahooGood&output=json-hoc&merge=3&sort=geo_distance%20asc"
-        var urlSoon = "http://api2.allforgood.org/api/volopps?key=YahooGood&output=json-hoc&merge=3&sort=eventrangestart%20asc"
-        var  url: String
+        
+        // figure out API URL for desired result sorting
+        var  url = "http://api2.allforgood.org/api/volopps?key=YahooGood&output=json-hoc&merge=3"
         if isNearby {
-            url = urlNear
+            url += "&sort=geo_distance%20asc"
         } else {
-            url = urlSoon
+            url += "&sort=eventrangestart%20asc"
         }
+        
+        // add location to query but escape spaces
         if city.isEmpty == false {
-            // add location to query but escape spaces
             url += "&vol_loc=" + city.stringByReplacingOccurrencesOfString(" ", withString: "+")
         }
+        
+        // tag query with proper escaping
+        if categoryTag != "" {
+            url += "&q=categorytags:" + categoryTag.stringByAddingPercentEncodingForURLQueryValue()!
+        }
+        println(url)
+        
+        // call API
         let request = NSURLRequest(URL: NSURL(string: url)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             
@@ -183,7 +208,13 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             // be sure to load the table
-            self.tableView.reloadData()
+            if self.opportunities.count > 0 {
+                self.tableView.reloadData()
+            } else {
+                var alert = UIAlertView(title: "Sorry", message: "No opportunities matching location and parameters", delegate: self, cancelButtonTitle: "OK")
+                alert.show()
+            }
+
             self.refreshControl.endRefreshing()
         }
     }

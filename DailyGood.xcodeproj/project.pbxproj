@@ -122,18 +122,18 @@
 		B8C5B8671A916D3C00A1909F /* DailyGood */ = {
 			isa = PBXGroup;
 			children = (
+				B8C5B86E1A916D3C00A1909F /* Main.storyboard */,
 				B8C5B88C1A91738100A1909F /* Common.swift */,
 				B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */,
 				B8C5B86C1A916D3C00A1909F /* ViewController.swift */,
-				B8C5B86E1A916D3C00A1909F /* Main.storyboard */,
-				B8DB0C411A930484007EFD14 /* MoreViewController.swift */,
-				B8DB0C3F1A92B67F007EFD14 /* ProfileViewController.swift */,
-				B8C5B88E1A9178DA00A1909F /* FeedDetail1ViewController.swift */,
 				B8C5B88A1A916DC500A1909F /* FeedViewController.swift */,
+				283825551A9BD2D7001EE5A2 /* VolCell.swift */,
+				B8C5B88E1A9178DA00A1909F /* FeedDetail1ViewController.swift */,
+				B8DB0C3F1A92B67F007EFD14 /* ProfileViewController.swift */,
+				B8DB0C411A930484007EFD14 /* MoreViewController.swift */,
 				B8C5B8711A916D3C00A1909F /* Images.xcassets */,
 				B8C5B8731A916D3C00A1909F /* LaunchScreen.xib */,
 				B8C5B8681A916D3C00A1909F /* Supporting Files */,
-				283825551A9BD2D7001EE5A2 /* VolCell.swift */,
 				2838255A1A9C859E001EE5A2 /* dummy.m */,
 				283825591A9C859E001EE5A2 /* DailyGood-Bridging-Header.h */,
 			);

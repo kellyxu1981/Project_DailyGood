@@ -22,3 +22,11 @@ func convertValue(value: Float, r1Min: Float, r1Max: Float, r2Min: Float, r2Max:
     return value * ratio + r2Min - r1Min * ratio
 }
 
+extension String {
+    func stringByAddingPercentEncodingForURLQueryValue() -> String? {
+        let characterSet = NSMutableCharacterSet.alphanumericCharacterSet()
+        characterSet.addCharactersInString("-._~")
+        
+        return stringByAddingPercentEncodingWithAllowedCharacters(characterSet)
+    }
+}

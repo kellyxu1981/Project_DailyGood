@@ -88,7 +88,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
     }
     func useLocationInfo(placemark: CLPlacemark!) {
-        if placemark != nil {
+        if placemark != nil && placemark.subThoroughfare != nil {
             //stop updating location to save battery life
             locationManager.stopUpdatingLocation()
             myLocation = placemark.subThoroughfare + " " + placemark.thoroughfare + ", " + placemark.locality + ", " + placemark.administrativeArea
@@ -107,10 +107,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.volOppLocation.text = opportunities[indexPath.row]["location_name"] as? String
         var tag = opportunities[indexPath.row]["categoryTags"] as [String]
         if tag.count > 0 {
-            // cell.volOppTag.hidden = false
             cell.volOppTag.text = tag[0] as String
         } else {
-            cell.volOppTag.hidden = true
+            //cell.volOppTag.hidden = true
+            cell.volOppTag.text = "no tag"
         }
         cell.volOppTitle.text = opportunities[indexPath.row]["title"] as? String
         cell.volOppDescription.text = opportunities[indexPath.row]["description"] as? String
@@ -129,7 +129,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             return cell
         }
-        var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&license=7&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=relevance&per_page=1"
+        // license = 7 (no copyright) does not return much, will deal with thislater
+        // var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&license=7&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness&per_page=1"
+        var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness-desc &per_page=1"
         flickrUrl += query
         let request = NSURLRequest(URL: NSURL(string: flickrUrl)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -139,10 +141,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 var picList = results["photo"] as [NSDictionary]
                 if picList.count > 0 {
                     var pic = picList[0] as NSDictionary
-                    var picUrl: String = "https://farm" + (pic["farm"] as String)
-                    picUrl += ".staticflickr.com/" + (pic["server"] as String)
-                    picUrl += "/" + (pic["id"] as String)
-                    picUrl += "_" + (pic["secret"] as String)
+                    var picUrl: String = "https://farm" + toString(pic["farm"]!)
+                    picUrl += ".staticflickr.com/" + toString(pic["server"]!)
+                    picUrl += "/" + toString(pic["id"]!)
+                    picUrl += "_" + toString(pic["secret"]!)
                     picUrl += "_n.jpg"
                     cell.volOppImage.setImageWithURL(NSURL(string: picUrl))
                 }
@@ -150,7 +152,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         // would be nice to get/set these too...
-        // cell.volOppLogo = .....
         // cell.volOppSponsor = .....
         // cell.volOppWhoJoined = .....
         return cell
@@ -169,7 +170,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if city.isEmpty == false {
             // add location to query but escape spaces
             url += "&vol_loc=" + city.stringByReplacingOccurrencesOfString(" ", withString: "+")
-            println(url)
         }
         let request = NSURLRequest(URL: NSURL(string: url)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -183,8 +183,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             // be sure to load the table
-            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
     

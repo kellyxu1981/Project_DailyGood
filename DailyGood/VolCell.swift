@@ -11,9 +11,9 @@ import UIKit
 class VolCell: UITableViewCell {
 
     @IBOutlet weak var volOppImage: UIImageView!
-    @IBOutlet weak var volOppLogo: UIImageView!
     @IBOutlet weak var volOppCharity: UILabel!
     @IBOutlet weak var volOppLocation: UILabel!
+    @IBOutlet weak var volOppTagView: UIView!
     @IBOutlet weak var volOppTag: UILabel!
     @IBOutlet weak var volOppTitle: UILabel!
     @IBOutlet weak var volOppDescription: UILabel!
@@ -24,6 +24,7 @@ class VolCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        volOppTagView.layer.cornerRadius = 4
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

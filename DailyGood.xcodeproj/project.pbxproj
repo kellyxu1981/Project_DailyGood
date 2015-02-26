@@ -40,6 +40,7 @@
 		283825591A9C859E001EE5A2 /* DailyGood-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DailyGood-Bridging-Header.h"; sourceTree = "<group>"; };
 		2838255A1A9C859E001EE5A2 /* dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dummy.m; sourceTree = "<group>"; };
 		28B5FE79BB94E817DA54B43F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		28B6B9231A9E98AA00510294 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6E00CAA1119961FAE6D8ED6D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B8C5B8651A916D3C00A1909F /* DailyGood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyGood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C5B8691A916D3C00A1909F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,6 +83,7 @@
 		06CC2096E4982442834A2A94 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28B6B9231A9E98AA00510294 /* QuartzCore.framework */,
 				C11E9154F5D331D4F6F5DF11 /* libPods.a */,
 			);
 			name = Frameworks;

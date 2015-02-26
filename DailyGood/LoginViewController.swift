@@ -13,14 +13,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var activityView: UIActivityIndicatorView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
-    @IBOutlet weak var square: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         activityView.alpha = 0
         // Do any additional setup after loading the view.
-        square.layer.cornerRadius = 10
 
     }
 

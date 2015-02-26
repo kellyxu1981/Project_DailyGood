@@ -425,16 +425,6 @@
                                 <rect key="frame" x="240" y="333" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rzh-dy-xW5">
-                                <rect key="frame" x="266" y="528" width="38" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="IJU-mx-iGX" kind="modal" modalTransitionStyle="crossDissolve" id="Ct7-yB-1SY"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" alpha="0.59999999999999964" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email address" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="ZPa-tq-kte">
                                 <rect key="frame" x="63" y="226" width="210" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -449,14 +439,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BXx-Fg-Zrn">
-                                <rect key="frame" x="153" y="157" width="42" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rzh-dy-xW5">
+                                <rect key="frame" x="266" y="528" width="38" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.35294117650000001" green="0.80000000000000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="IJU-mx-iGX" kind="modal" modalTransitionStyle="crossDissolve" id="Ct7-yB-1SY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -464,7 +456,6 @@
                         <outlet property="activityView" destination="DKr-b1-LOe" id="Dba-XG-KOz"/>
                         <outlet property="emailTextField" destination="ZPa-tq-kte" id="k2x-Cs-K2U"/>
                         <outlet property="passwordTextField" destination="iRU-Lx-zlD" id="5FB-Pj-I0f"/>
-                        <outlet property="square" destination="BXx-Fg-Zrn" id="PXC-vk-sop"/>
                         <segue destination="IJU-mx-iGX" kind="modal" identifier="loginSegue" id="iOB-3O-d1l"/>
                     </connections>
                 </viewController>

@@ -131,7 +131,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         // license = 7 (no copyright) does not return much, will deal with thislater
         // var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&license=7&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness&per_page=1"
-        var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness-desc &per_page=1"
+        var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness-desc&per_page=1"
         flickrUrl += query
         let request = NSURLRequest(URL: NSURL(string: flickrUrl)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in

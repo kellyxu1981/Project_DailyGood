@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedDetail1ViewController: UIViewController, UIActionSheetDelegate {
+class FeedDetailViewController: UIViewController, UIActionSheetDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var checkBtn1: UIButton!

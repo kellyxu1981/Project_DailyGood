@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,7 +19,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var opportunities: [NSDictionary]! = []
     var isNearby: Bool = true
     var refreshControl: UIRefreshControl!
-    var categoryTag: String = "Environment"
+    var categoryTag: String! = "Environment"
     
     @IBOutlet weak var btn_nearby: UIButton!
     @IBOutlet weak var btn_recent: UIButton!
@@ -44,12 +44,18 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // NB: should make sure data is loaded from API again when refreshing....
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
-        
+        tableView.addSubview(refreshControl)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            triggerLocationServices()
+        }
     }
     
     // for location stuff -- we only need access to location when app is in use
@@ -60,7 +66,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if self.locationManager.respondsToSelector("requestWhenInUseAuthorization") {
                 locationManager.requestWhenInUseAuthorization()
             } else {
-                locationManager.startMonitoringSignificantLocationChanges()
+                locationManager.startUpdatingLocation()
             }
         } else {
             var alert = UIAlertView(title: "Location Error", message: "Location services desabled", delegate: self, cancelButtonTitle: "OK")
@@ -69,7 +75,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
        if status == .AuthorizedWhenInUse || status == .Authorized {
-            locationManager.startMonitoringSignificantLocationChanges()
+            locationManager.startUpdatingLocation()
         }
     }
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
@@ -97,16 +103,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if placemark != nil && placemark.locality != nil {
             //stop updating location to save battery life
             didFindLoc = true
-            locationManager.stopMonitoringSignificantLocationChanges()
-            myLocation = placemark.locality + ", " + placemark.administrativeArea
-            if placemark.thoroughfare != nil {
-                myLocation = placemark.thoroughfare + ", " + myLocation
-                if placemark.subThoroughfare != nil {
-                    myLocation = placemark.subThoroughfare + " " + myLocation
-                }
-            }
+            locationManager.stopUpdatingLocation()
+            myLocation = placemark.postalCode
             // get data from API
-            getVolOpps(myLocation)
+            getVolOpps()
         } else {
             var alert = UIAlertView(title: "Location Error", message: "Could not get your city", delegate: self, cancelButtonTitle: "OK")
             alert.show()
@@ -136,18 +136,18 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // for image we use flickr API...
         var query: String
-        if tag.count > 0 {
-            let tags = tag[0].componentsSeparatedByString(" ")
-            query = "&tags=" + "%2C".join(tags)
-        } else if let charity = cell.volOppCharity.text {
+        if let charity = cell.volOppCharity.text {
             let words = charity.componentsSeparatedByString(" ")
             query = "&text=" + "%20".join(words)
+        } else if tag.count > 0 {
+            let tags = tag[0].componentsSeparatedByString(" ")
+            query = "&tags=" + "%2C".join(tags) + "&tag_mode=any"
         } else {
             return cell
         }
         // license = 7 (no copyright) does not return much, will deal with this later
         // var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&license=7&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness&per_page=1"
-        var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness-desc&per_page=1"
+        var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness-desc&per_page=1"
         flickrUrl += query
         let request = NSURLRequest(URL: NSURL(string: flickrUrl)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -174,7 +174,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // for getting data from API
-    func getVolOpps(city: String) {
+    func getVolOpps() {
         
         // figure out API URL for desired result sorting
         var  url = "http://api2.allforgood.org/api/volopps?key=YahooGood&output=json-hoc&merge=3"
@@ -184,16 +184,21 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             url += "&sort=eventrangestart%20asc"
         }
         
-        // add location to query but escape spaces
-        if city.isEmpty == false {
-            url += "&vol_loc=" + city.stringByReplacingOccurrencesOfString(" ", withString: "+")
+        // make sure we have location (ZIP code)
+        if myLocation.isEmpty {
+            let alert = UIAlertView(title: "Error", message: "Did not get location", delegate: self, cancelButtonTitle: "OK", otherButtonTitles: "Retry")
+            alert.show()
+            return
+        } else {
+            // add location to query
+            url += "&vol_loc=" + myLocation
         }
         
         // tag query with proper escaping
-        if categoryTag != "" {
+        if !categoryTag.isEmpty {
             url += "&q=categorytags:" + categoryTag.stringByAddingPercentEncodingForURLQueryValue()!
         }
-        println(url)
+        // println("url: \(url)")
         
         // call API
         let request = NSURLRequest(URL: NSURL(string: url)!)
@@ -214,41 +219,45 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 var alert = UIAlertView(title: "Sorry", message: "No opportunities matching location and parameters", delegate: self, cancelButtonTitle: "OK")
                 alert.show()
             }
-
             self.refreshControl.endRefreshing()
         }
+    }
+    
+    @IBAction func onProfile(sender: AnyObject) {
+        performSegueWithIdentifier("ProfileSegue", sender: nil)
     }
     
     @IBAction func onTapNearbyBtn(sender: AnyObject) {
         isNearby = true
         btn_nearby.enabled = false
         btn_recent.enabled = true
-        triggerLocationServices()
+        getVolOpps()
     }
     
     @IBAction func onTapRecentBtn(sender: AnyObject) {
         isNearby = false
         btn_nearby.enabled = true
         btn_recent.enabled = false
-        triggerLocationServices()
+        getVolOpps()
     }
     
     func onRefresh() {
-        triggerLocationServices()
-        // delay(0.5) {
-        //    self.refreshControl.endRefreshing()
-        //}
+        getVolOpps()
     }
     
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let profileVC = segue.destinationViewController as ProfileViewController
+        profileVC.profileTag = categoryTag
     }
-    */
+    
+    @IBAction func profileUnwind(segue: UIStoryboardSegue) {
+        let profileVC = segue.sourceViewController as ProfileViewController
+        categoryTag = profileVC.profileTag
+        getVolOpps()
+    }
 
 }

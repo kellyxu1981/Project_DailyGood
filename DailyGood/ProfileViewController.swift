@@ -43,11 +43,13 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onTapBackBtn(sender: AnyObject) {
-        var feedVC = self.presentingViewController as FeedViewController
-        feedVC.categoryTag = self.profileTag
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+    //    // (This is not a good way, trying wih unwide segue...)
+    //    @IBAction func onTapBackBtn(sender: AnyObject) {
+    //        var navigationController = self.presentingViewController as UINavigationController
+    //        var feedVC = navigationController.topViewController as FeedViewController
+    //        feedVC.categoryTag = self.profileTag
+    //        dismissViewControllerAnimated(true, completion: nil)
+    //    }
 
     @IBAction func onTapJobView(sender: AnyObject) {
         self.btn_open_job.enabled = false
@@ -114,6 +116,13 @@ class ProfileViewController: UIViewController {
     @IBAction func onTagChoice(sender: UIButton) {
         if let tag = sender.titleLabel?.text {
             profileTag = tag
+            if let s = sender.superview {
+                let bs: [UIButton] = s.subviews as [UIButton]
+                for b in bs {
+                    b.enabled = true
+                }
+            }
+            sender.enabled = false
         }
     }
     

@@ -12,7 +12,6 @@
 		2838255B1A9C859E001EE5A2 /* dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838255A1A9C859E001EE5A2 /* dummy.m */; };
 		3E88E6229FBF0B8903BBE456 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11E9154F5D331D4F6F5DF11 /* libPods.a */; };
 		B8C5B86B1A916D3C00A1909F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */; };
-		B8C5B86D1A916D3C00A1909F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C5B86C1A916D3C00A1909F /* ViewController.swift */; };
 		B8C5B8701A916D3C00A1909F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8C5B86E1A916D3C00A1909F /* Main.storyboard */; };
 		B8C5B8721A916D3C00A1909F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8C5B8711A916D3C00A1909F /* Images.xcassets */; };
 		B8C5B8751A916D3C00A1909F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8C5B8731A916D3C00A1909F /* LaunchScreen.xib */; };
@@ -45,7 +44,6 @@
 		B8C5B8651A916D3C00A1909F /* DailyGood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyGood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C5B8691A916D3C00A1909F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B8C5B86C1A916D3C00A1909F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B8C5B86F1A916D3C00A1909F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B8C5B8711A916D3C00A1909F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8C5B8741A916D3C00A1909F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 				B8C5B86E1A916D3C00A1909F /* Main.storyboard */,
 				B8C5B88C1A91738100A1909F /* Common.swift */,
 				B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */,
-				B8C5B86C1A916D3C00A1909F /* ViewController.swift */,
 				B8C5B88A1A916DC500A1909F /* FeedViewController.swift */,
 				283825551A9BD2D7001EE5A2 /* VolCell.swift */,
 				B8C5B88E1A9178DA00A1909F /* FeedDetailViewController.swift */,
@@ -304,7 +301,6 @@
 				283825561A9BD2D7001EE5A2 /* VolCell.swift in Sources */,
 				B8DB0C401A92B67F007EFD14 /* ProfileViewController.swift in Sources */,
 				B8C5B88D1A91738100A1909F /* Common.swift in Sources */,
-				B8C5B86D1A916D3C00A1909F /* ViewController.swift in Sources */,
 				B8C5B88F1A9178DA00A1909F /* FeedDetailViewController.swift in Sources */,
 				2838255B1A9C859E001EE5A2 /* dummy.m in Sources */,
 				B8C5B88B1A916DC500A1909F /* FeedViewController.swift in Sources */,

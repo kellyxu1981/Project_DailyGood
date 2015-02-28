@@ -1,5 +1,5 @@
 //
-//  FeedDetail1ViewController.swift
+//  FeedDetailViewController.swift
 //  DailyGood
 //
 //  Created by Kelly Xu on 2/15/15.
@@ -13,16 +13,16 @@ class FeedDetailViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var checkBtn1: UIButton!
 
-    
+    var selection = NSDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         scrollView.contentSize = CGSize(width: 320, height: 1284)
 
         checkBtn1.enabled = true
         
+        println(selection["imageURL"]!)
     }
 
     override func didReceiveMemoryWarning() {

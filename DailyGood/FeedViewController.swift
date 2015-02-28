@@ -119,18 +119,19 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("VolCell") as VolCell
-        cell.volOppCharity.text = opportunities[indexPath.row]["sponsoringOrganizationName"] as? String
-        cell.volOppLocation.text = opportunities[indexPath.row]["location_name"] as? String
-        var tag = opportunities[indexPath.row]["categoryTags"] as [String]
+        var thisOpp: NSMutableDictionary = opportunities[indexPath.row].mutableCopy() as NSMutableDictionary
+        cell.volOppCharity.text = thisOpp["sponsoringOrganizationName"] as? String
+        cell.volOppLocation.text = thisOpp["location_name"] as? String
+        var tag: [String] = thisOpp["categoryTags"] as [String]!
         if tag.count > 0 {
             cell.volOppTag.text = tag[0] as String
         } else {
             //cell.volOppTag.hidden = true
             cell.volOppTag.text = "no tag"
         }
-        cell.volOppTitle.text = opportunities[indexPath.row]["title"] as? String
-        cell.volOppDescription.text = opportunities[indexPath.row]["description"] as? String
-        let startDate = opportunities[indexPath.row]["startDate"] as String
+        cell.volOppTitle.text = thisOpp["title"] as? String
+        cell.volOppDescription.text = thisOpp["description"] as? String
+        let startDate = thisOpp["startDate"] as String
         let when = startDate.componentsSeparatedByString(" ")
         cell.volOppTime.text = when[0] + " at " + when[1]
         
@@ -145,9 +146,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             return cell
         }
-        // license = 7 (no copyright) does not return much, will deal with this later
-        // var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&tag_mode=any&license=7&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness&per_page=1"
         var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc0877fa484b0b38e2d299a5c491c764&safe_search=1&content_type=1&media=photos&format=json&nojsoncallback=1&sort=interestingness-desc&per_page=1"
+        // flickrUrl += "&license=7" // SHOULD ONLY CONSIDER PUBLIC DOMAIN IMAGES!!! BUT NOT MANY RESULTS... DEAL W/THIS LATER...
         flickrUrl += query
         let request = NSURLRequest(URL: NSURL(string: flickrUrl)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -163,13 +163,15 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     picUrl += "_" + toString(pic["secret"]!)
                     picUrl += "_n.jpg"
                     cell.volOppImage.setImageWithURL(NSURL(string: picUrl))
+                    thisOpp["imageURL"] = picUrl
                 }
             }
         }
         
         // would be nice to get/set these too...
-        // cell.volOppSponsor = .....
+        // cell.volOppSponsor = ..... FROM YAHOO?
         // cell.volOppWhoJoined = .....
+        cell.volOpp = thisOpp as NSDictionary
         return cell
     }
     
@@ -250,14 +252,20 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let profileVC = segue.destinationViewController as ProfileViewController
-        profileVC.profileTag = categoryTag
+        if segue.identifier == "detailSegue" {
+            let detailVC = segue.destinationViewController as FeedDetailViewController
+            let cell = sender as VolCell
+            detailVC.selection = cell.volOpp
+        } else if segue.identifier == "ProfileSegue" {
+            let profileVC = segue.destinationViewController as ProfileViewController
+            profileVC.profileTag = categoryTag
+        }
     }
     
     @IBAction func profileUnwind(segue: UIStoryboardSegue) {
-        let profileVC = segue.sourceViewController as ProfileViewController
-        categoryTag = profileVC.profileTag
-        getVolOpps()
+            let profileVC = segue.sourceViewController as ProfileViewController
+            categoryTag = profileVC.profileTag
+            getVolOpps()
     }
 
 }

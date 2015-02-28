@@ -20,6 +20,7 @@ class VolCell: UITableViewCell {
     @IBOutlet weak var volOppSponsor: UILabel!
     @IBOutlet weak var volOppTime: UILabel!
     @IBOutlet weak var volOppWhoJoined: UILabel!
+    var volOpp: NSDictionary! // all data including imageURL
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -54,7 +54,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
-            triggerLocationServices()
+            getVolOpps()
         }
     }
     
@@ -190,6 +190,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if myLocation.isEmpty {
             let alert = UIAlertView(title: "Error", message: "Did not get location", delegate: self, cancelButtonTitle: "OK", otherButtonTitles: "Retry")
             alert.show()
+            self.refreshControl.endRefreshing()
             return
         } else {
             // add location to query

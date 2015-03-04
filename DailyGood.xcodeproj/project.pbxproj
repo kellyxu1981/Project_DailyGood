@@ -10,6 +10,7 @@
 		283825561A9BD2D7001EE5A2 /* VolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283825551A9BD2D7001EE5A2 /* VolCell.swift */; };
 		283825581A9C25EE001EE5A2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283825571A9C25EE001EE5A2 /* CoreLocation.framework */; };
 		2838255B1A9C859E001EE5A2 /* dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838255A1A9C859E001EE5A2 /* dummy.m */; };
+		289AB6E91AA6EFA500271E9C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289AB6E81AA6EFA500271E9C /* WebViewController.swift */; };
 		3E88E6229FBF0B8903BBE456 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11E9154F5D331D4F6F5DF11 /* libPods.a */; };
 		B8C5B86B1A916D3C00A1909F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C5B86A1A916D3C00A1909F /* AppDelegate.swift */; };
 		B8C5B8701A916D3C00A1909F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8C5B86E1A916D3C00A1909F /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		283825571A9C25EE001EE5A2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		283825591A9C859E001EE5A2 /* DailyGood-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DailyGood-Bridging-Header.h"; sourceTree = "<group>"; };
 		2838255A1A9C859E001EE5A2 /* dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dummy.m; sourceTree = "<group>"; };
+		289AB6E81AA6EFA500271E9C /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		28B5FE79BB94E817DA54B43F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		28B6B9231A9E98AA00510294 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6E00CAA1119961FAE6D8ED6D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				B8C5B88A1A916DC500A1909F /* FeedViewController.swift */,
 				283825551A9BD2D7001EE5A2 /* VolCell.swift */,
 				B8C5B88E1A9178DA00A1909F /* FeedDetailViewController.swift */,
+				289AB6E81AA6EFA500271E9C /* WebViewController.swift */,
 				B8DB0C3F1A92B67F007EFD14 /* ProfileViewController.swift */,
 				B8DB0C411A930484007EFD14 /* MoreViewController.swift */,
 				B8C5B8711A916D3C00A1909F /* Images.xcassets */,
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8DB0C421A930484007EFD14 /* MoreViewController.swift in Sources */,
+				289AB6E91AA6EFA500271E9C /* WebViewController.swift in Sources */,
 				283825561A9BD2D7001EE5A2 /* VolCell.swift in Sources */,
 				B8DB0C401A92B67F007EFD14 /* ProfileViewController.swift in Sources */,
 				B8C5B88D1A91738100A1909F /* Common.swift in Sources */,

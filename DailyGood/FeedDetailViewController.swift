@@ -120,8 +120,6 @@ class FeedDetailViewController: UIViewController, UIActionSheetDelegate {
             }
         }
 
-        // TO-DO: Could add WebView for selection["detailUrl"]
-
         // finally we can size the scrollview
         scrollView.contentSize = CGSize(width: 320, height: position)
     }
@@ -140,7 +138,7 @@ class FeedDetailViewController: UIViewController, UIActionSheetDelegate {
             mapView.showAnnotations([opp], animated: false)
         }
     }
-
+    
     @IBAction func onTapBackBtn(sender: AnyObject) {
         navigationController!.popViewControllerAnimated(true)
     }
@@ -150,7 +148,6 @@ class FeedDetailViewController: UIViewController, UIActionSheetDelegate {
             var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: "CONFIRMED")
             actionSheet.showInView(view)
     }
-
     
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int){
         if (buttonIndex == 0){
@@ -158,5 +155,13 @@ class FeedDetailViewController: UIViewController, UIActionSheetDelegate {
         } else {
             checkBtn1.selected = false
         }
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var webVC = segue.destinationViewController as WebViewController
+        webVC.url = selection["detailUrl"] as String
     }
 }
